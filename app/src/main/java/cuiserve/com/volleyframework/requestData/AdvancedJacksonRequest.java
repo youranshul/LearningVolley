@@ -23,13 +23,12 @@ public abstract class AdvancedJacksonRequest<T> extends JsonRequest<T> {
     /**
      * Creates a new request.
      * @param method        the HTTP method to use
-     * @param responseType
      * @param url           URL to fetch the JSON from
      * @param requestData   A {@link Object} to post and convert into json as the request. Null is allowed and indicates no parameters will be posted along with request.
      * @param listener      Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public AdvancedJacksonRequest(int method, Class<T> responseType, String url, Object requestData, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+    public AdvancedJacksonRequest(int method, Class<T> responseType, String url, Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(method, url, null, listener, errorListener);
         this.responseType = responseType;
     }

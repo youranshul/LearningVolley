@@ -28,8 +28,8 @@ public class JacksonRequest<T> extends JsonRequest<T> {
         super(method, url, (requestData == null) ? null : Mapper.string(requestData), listener, errorListener);
     }
 
-    public void setResponseType(T type){
-            this.responseType = (Class<T>) type;
+    public void setResponseType(Class<T> type){
+            this.responseType = type;
     }
 
     @Override

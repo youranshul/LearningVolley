@@ -1,18 +1,15 @@
 package cuiserve.com.volleyframework.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import javax.net.ssl.SSLPeerUnverifiedException;
-
 import cuiserve.com.volleyframework.R;
 import cuiserve.com.volleyframework.httpConnection.AdvancedConnectionUtil;
 import cuiserve.com.volleyframework.httpConnection.HttpRequestConstant;
-import cuiserve.com.volleyframework.requestData.CustomRequest;
+import cuiserve.com.volleyframework.requestData.AdvancedJacksonRequest;
 import cuiserve.com.volleyframework.requestData.DataList;
 
 public class MainActivity extends SuperActivity {
@@ -27,30 +24,16 @@ public class MainActivity extends SuperActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         showProgressBar();
-        CustomRequest<DataList> JacksonRequest  = (CustomRequest) new AdvancedConnectionUtil<DataList>(HttpRequestConstant.LOGIN_REQUEST, httpListener).getRequest();
-
-        //This commented code works fine when i create a request this way
-       /* JacksonRequest<DataList> jacksonRequest = new JacksonRequest<DataList>(Request.Method.GET, HttpRequestConstant.JACKSON_FETCH, null, DataList.class, new Response.Listener<DataList>() {
-            @Override
-            public void onResponse(DataList response) {
-                hideProgressBar();
-                Log.e("ANSH", "onResponse : " + response.getPicture());
+        AdvancedConnectionUtil<DataList> util = new AdvancedConnectionUtil<>(HttpRequestConstant.LOGIN_REQUEST,
+                                                                                   httpListener, DataList.class);
+        AdvancedJacksonRequest<DataList> jacksonRequest = util.getRequest();
 
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                hideProgressBar();
-                Log.e("ANSH", "onErrorResponse : " + error.getLocalizedMessage());
-            }
-        });*/
-
-        onExecute(JacksonRequest);
+        onExecute(jacksonRequest);
 
     }
 
-    private AdvancedConnectionUtil.ServerListener  httpListener = new AdvancedConnectionUtil.ServerListener<DataList>() {
+    private AdvancedConnectionUtil.ServerListener<DataList> httpListener = new AdvancedConnectionUtil.ServerListener<DataList>() {
         @Override
         public void onDataReceived(DataList data) {
             hideProgressBar();
@@ -66,7 +49,7 @@ public class MainActivity extends SuperActivity {
 
     @Override
     protected void internetAvailable() {
-
+        //NA
     }
 
     @Override

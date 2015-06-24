@@ -4,8 +4,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import cuiserve.com.volleyframework.requestData.AdvancedJacksonRequest;
-import cuiserve.com.volleyframework.requestData.CustomRequest;
-import cuiserve.com.volleyframework.requestData.DataList;
+import cuiserve.com.volleyframework.requestData.LoginRequest;
 
 /**
  * Created by ansh on 21/6/15.
@@ -13,20 +12,21 @@ import cuiserve.com.volleyframework.requestData.DataList;
 public class AdvancedConnectionUtil<T> implements Response.Listener<T>, Response.ErrorListener {
 
     private int requestType;
+    private final Class<T> type;
     private ServerListener listener;
 
-    public AdvancedConnectionUtil(int requestType, ServerListener<T> listener) {
+    public AdvancedConnectionUtil(int requestType, ServerListener<T> listener, Class<T> type) {
 
         this.listener = listener;
         this.requestType = requestType;
+        this.type = type;
     }
 
     public AdvancedJacksonRequest<T> getRequest() {
 
         switch (requestType) {
             case HttpRequestConstant.LOGIN_REQUEST:
-                //This gives compile error while while passing DataList.class in the argument
-                return new CustomRequest<T>((Class<T>) DataList.class, this, this);
+                return new LoginRequest<T>(type, this, this);
         }
         return null;
     }
