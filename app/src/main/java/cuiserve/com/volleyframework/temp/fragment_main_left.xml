@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffb7b3ff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I am left"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="@dimen/add_button_margin"
+         />
+
+    <!--<ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="@dimen/diameter"
+        android:layout_height="@dimen/diameter"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="@dimen/add_button_margin"
+        android:background="@drawable/oval_ripple"
+        android:elevation="@dimen/elevation_low"
+        android:src="@android:drawable/ic_input_add"
+        android:stateListAnimator="@anim/button_elevation"
+        android:tint="@android:color/white" />-->
+
+</FrameLayout>
